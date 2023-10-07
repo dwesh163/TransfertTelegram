@@ -6,9 +6,12 @@ const bot = new Telegraf(process.env.TOKEN)
 
 async function telegram() {
 
-    bot.command('start', async (ctx) => {
-        ctx.reply("Hello i'm a bot...")
-    })
+    bot.on('message', (msg) => {
+        const messageText = msg.update.message.text;
+    
+        bot.telegram.sendMessage(process.env.CHATID, messageText);
+      });
+
     bot.launch()
 }
 
